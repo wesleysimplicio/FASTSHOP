@@ -1,0 +1,35 @@
+//Database: fastshop
+
+/** Collections **/
+
+//Products
+{
+    "_id": ObjectId("5d36795888eef21b24abf8c8"), 
+    "Name": null,
+    "Price": null,
+    "Status" : null,
+    "CreateAt" : Date(-62135596800000),
+    "UpdateAt" : Date(-62135596800000),    
+}
+
+//Orders
+{
+    "_id": ObjectId("5d36795888eef21b24abf8c8"), 
+    "ClientId": null,
+    "Products": [],
+    "Status" : null,
+    "CreateAt" : Date(-62135596800000),
+    "UpdateAt" : Date(-62135596800000) 
+}
+
+//Clients
+{
+    "_id": ObjectId("5d36795888eef21b24abf8c8"), 
+    "Name": "Wesley Simplicio",
+    "Document": 41343850835,
+    "Email": "wesleysimplicio@live.com",
+    "Status" : 1,
+    "CreateAt" : "2019-12-08T00:00:00Z",
+    "UpdateAt" : null        
+}
+

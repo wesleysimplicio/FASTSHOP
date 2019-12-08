@@ -42,8 +42,8 @@ namespace FASTSHOP.Api
             services.Configure<MongoConfiguration>(Configuration.GetSection("MongoDB"));
             services.AddMongoDB();
 
-            services.AddScoped<IContactRepository, ContactRepository>();
-            services.AddScoped<IContactBusiness, ContactBusiness>();
+            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IClientBusiness, ClientBusiness>();
             services.AddScoped<IMongoClient, MongoClient>();
             services.AddMvc();
         }
