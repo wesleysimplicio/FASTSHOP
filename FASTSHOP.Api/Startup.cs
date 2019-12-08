@@ -16,6 +16,7 @@ using FASTSHOP.Api.Domain.Interfaces;
 using NLog.Extensions.Logging;
 using NLog;
 using FASTSHOP.Api.Domain.Mongo;
+using FASTSHOP.Api.Models;
 
 namespace FASTSHOP.Api
 {
@@ -38,7 +39,12 @@ namespace FASTSHOP.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
+            services.AddMvcCore(options =>
+            {
+                options.Filters.Add(typeof(ValidateModelFilter));
+            });
+
             services.Configure<MongoConfiguration>(Configuration.GetSection("MongoDB"));
             services.AddMongoDB();
 

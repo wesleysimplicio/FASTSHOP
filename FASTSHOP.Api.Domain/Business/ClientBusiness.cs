@@ -32,20 +32,18 @@ namespace FASTSHOP.Api.Domain.Business
 
         public bool Insert(Client client)
         {
+            var findDocument = GetByDocument(client.Document);
+            if (findDocument != null)
+            {
+                throw new Exception("Documento já existe");
+            }
+
             this._clientRepository.Insert(client);
             return true;
         }
 
         public bool Update(Client client)
         {
-
-            if (string.IsNullOrWhiteSpace(client.Name)
-                || string.IsNullOrWhiteSpace(client.Email)
-                || client.Document == null)
-            {
-                return false;
-            }
-
             return this._clientRepository.Update(client) > 0;
         }
 
@@ -62,6 +60,7 @@ namespace FASTSHOP.Api.Domain.Business
 
             return this._clientRepository.Delete(Document) > 0;
         }
+
 
         public void Dispose()
         {

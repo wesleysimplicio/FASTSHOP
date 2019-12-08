@@ -75,9 +75,9 @@ namespace FASTSHOP.Api.Controllers
             }
             catch (Exception ex)
             {
-                string error = $"Não foi possível inserir";
+                string error = string.IsNullOrWhiteSpace(ex.Message) ? "Não foi possível inserir" : ex.Message;
                 this._logger.LogError(ex, error);
-                return BadRequest(new ErrorItem(2, error));
+                return BadRequest(new ErrorItem(3, error));
             }
         }
 
@@ -101,9 +101,9 @@ namespace FASTSHOP.Api.Controllers
             }
             catch (Exception ex)
             {
-                string error = $"Não foi possível inserir";
+                string error = string.IsNullOrWhiteSpace(ex.Message) ? "Não foi possível atualizar" : ex.Message;
                 this._logger.LogError(ex, error);
-                return BadRequest(new ErrorItem(2, error));
+                return BadRequest(new ErrorItem(4, error));
             }
         }
 
