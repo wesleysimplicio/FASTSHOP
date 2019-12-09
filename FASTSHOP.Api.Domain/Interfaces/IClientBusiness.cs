@@ -7,7 +7,7 @@ namespace FASTSHOP.Api.Domain.Interfaces
     public interface IClientBusiness : IDisposable
     {
         List<Client> Get();
-        Client GetById(string Id);
+        Client GetById(string Code);
         Client GetByDocument(long? Document);
         bool Insert(Client client);
         bool Update(Client client);

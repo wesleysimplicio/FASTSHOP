@@ -13,6 +13,7 @@ namespace FASTSHOP.Api.Domain.Models
         [BsonIgnoreIfDefault]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
+        public string Code { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

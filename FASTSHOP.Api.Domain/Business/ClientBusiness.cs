@@ -1,4 +1,5 @@
-﻿using FASTSHOP.Api.Domain.Interfaces;
+﻿using FASTSHOP.Api.Domain.Enums;
+using FASTSHOP.Api.Domain.Interfaces;
 using FASTSHOP.Api.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,9 @@ namespace FASTSHOP.Api.Domain.Business
             return _clientRepository.Get();
         }
 
-        public Client GetById(string Id)
+        public Client GetById(string Code)
         {
-            return _clientRepository.GetById(Id);
+            return _clientRepository.GetById(Code);
         }
 
         public Client GetByDocument(long? Document)
@@ -33,34 +34,38 @@ namespace FASTSHOP.Api.Domain.Business
         public bool Insert(Client client)
         {
             var findDocument = GetByDocument(client.Document);
-            if (findDocument != null)
-            {
-                throw new Exception("Documento já existe");
-            }
+            if (findDocument != null) throw new Exception("Documento já existe");
 
+            client.Code = Guid.NewGuid().ToString("N");
+            client.CreateAt = DateTime.Now;
+            client.Status = StatusEnum.Active;
             _clientRepository.Insert(client);
+
             return true;
         }
 
         public bool Update(Client client)
         {
+            var cliResult = GetByDocument(client.Document);
+            if (cliResult == null) throw new Exception("Documento não existe");
+
+            client.CreateAt = cliResult.CreateAt;
+            client.UpdateAt = DateTime.Now;
             return _clientRepository.Update(client) > 0;
         }
 
         public bool Delete(long? Document)
         {
-            if (Document == null)
-                return false;
+            if (Document == null) return false;
 
-            var dbUser = _clientRepository.GetByDocument(Document);
-            if (dbUser == null)
+            var result = _clientRepository.GetByDocument(Document);
+            if (result == null)
             {
                 throw new Exception("Este cliente não existe");
             }
 
             return _clientRepository.Delete(Document) > 0;
         }
-
 
         public void Dispose()
         {

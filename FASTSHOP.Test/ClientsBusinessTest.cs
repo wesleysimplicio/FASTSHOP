@@ -25,7 +25,7 @@ namespace FASTSHOP.Test
             ClientBusiness clientBusiness = new ClientBusiness(mockClientR.Object);
             var client = new Client()
             {
-                Id = "5d36795888eef21b24abf8c8",
+                Code = "3255d0c982054e1d8d1301ec31039ea3",
                 Name = "Wesley Simplicio",
                 Document = 41343850835,
                 Email = "wesleysimplicio@live.com",
@@ -37,20 +37,20 @@ namespace FASTSHOP.Test
         }
 
         [TestMethod]
-        public void GetById()
+        public void GetByDocument()
         {
             var mockClientR = new Mock<IClientRepository>();
             ClientBusiness clientBusiness = new ClientBusiness(mockClientR.Object);
             var client = new Client()
             {
-                Id = "5d36795888eef21b24abf8c8",
+                Code = "3255d0c982054e1d8d1301ec31039ea3",
                 Name = "Wesley Simplicio",
                 Document = 41343850835,
                 Email = "wesleysimplicio@live.com",
                 Status = StatusEnum.Active,
                 CreateAt = new DateTime(2019, 12, 08)
             };
-            mockClientR.Setup(p => p.GetByDocument(41343850835)).Returns(client);
+            mockClientR.Setup(p => p.GetByDocument(client.Document)).Returns(client);
 
             var result = clientBusiness.GetByDocument(41343850835);
             Assert.IsTrue(result != null);
@@ -64,7 +64,7 @@ namespace FASTSHOP.Test
             var client = new List<Client>();
             client.Add(new Client()
             {
-                Id = "5d36795888eef21b24abf8c8",
+                Code = "3255d0c982054e1d8d1301ec31039ea3",
                 Name = "Wesley Simplicio",
                 Document = 41343850835,
                 Email = "wesleysimplicio@live.com",
@@ -86,13 +86,14 @@ namespace FASTSHOP.Test
             ClientBusiness clientBusiness = new ClientBusiness(mockClientR.Object);
             var client = new Client()
             {
-                Id = "5d36795888eef21b24abf8c8",
+                Code = "3255d0c982054e1d8d1301ec31039ea3",
                 Name = "Wesley Simplicio",
                 Document = 41343850835,
                 Email = "wesleysimplicio@live.com",
                 Status = StatusEnum.Active,
                 CreateAt = new DateTime(2019, 12, 08)
             };
+            mockClientR.Setup(p => p.GetByDocument(client.Document)).Returns(client);
             mockClientR.Setup(p => p.Update(client)).Returns(1);
             var result = clientBusiness.Update(client);
             Assert.IsTrue(result);

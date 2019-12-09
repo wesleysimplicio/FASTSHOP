@@ -12,17 +12,17 @@ namespace FASTSHOP.Api.Controllers
 {
     [Produces("application/json")]
     [Route("[controller]")]
-    public class ClientsController : Controller
+    public class ProductsController : Controller
     {
-        private readonly IClientBusiness _clientBusiness;
+        private readonly IProductBusiness _productBusiness;
         private readonly ILogger _logger;
 
-        public ClientsController(
-             IClientBusiness clientBusiness,
-             ILogger<ClientsController> logger
+        public ProductsController(
+             IProductBusiness productBusiness,
+             ILogger<ProductsController> logger
             )
         {
-            this._clientBusiness = clientBusiness;
+            this._productBusiness = productBusiness;
             this._logger = logger;
         }
 
@@ -31,37 +31,37 @@ namespace FASTSHOP.Api.Controllers
         {
             try
             {
-                return Ok(this._clientBusiness.Get());
+                return Ok(this._productBusiness.Get());
             }
             catch (Exception ex)
             {
-                string error = "Não foi possível realizar a busca de clientes";
+                string error = "Não foi possível realizar a busca de Productes";
                 this._logger.LogError(ex, error);
                 return BadRequest(new ErrorItem(1, error));
             }
         }
 
-        [HttpGet("{Id}")]
-        public IActionResult GetByDocument(long document)
+        [HttpGet("{Code}")]
+        public IActionResult GetById(string Code)
         {
             try
             {
-                return Ok(this._clientBusiness.GetByDocument(document));
+                return Ok(this._productBusiness.GetById(Code));
             }
             catch (Exception ex)
             {
-                string error = $"Não foi possível realizar a busca do cliente: {document}";
+                string error = $"Não foi possível realizar a busca do Produto: {Code}";
                 this._logger.LogError(ex, error);
                 return BadRequest(new ErrorItem(2, error));
             }
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Client client)
+        public IActionResult Post([FromBody]Product Product)
         {
             try
             {
-                var resul = this._clientBusiness.Insert(client);
+                var resul = this._productBusiness.Insert(Product);
                 if (resul)
                 {
                     return Ok();
@@ -81,20 +81,20 @@ namespace FASTSHOP.Api.Controllers
             }
         }
 
-        [HttpPut("{Id}")]
-        public IActionResult Put(string Code, [FromBody]Client client)
+        [HttpPut("{Code}")]
+        public IActionResult Put(string Code, [FromBody]Product Product)
         {
             try
             {
-                client.Code = Code;
-                var resul = this._clientBusiness.Update(client);
+                Product.Code = Code;
+                var resul = this._productBusiness.Update(Product);
                 if (resul)
                 {
                     return Ok();
                 }
                 else
                 {
-                    _logger.LogDebug("Não foi possível atualizar cliente : " + Code);
+                    _logger.LogDebug("Não foi possível atualizar Produto : " + Code);
                     return new BadRequestResult();
                 }
 
@@ -107,26 +107,26 @@ namespace FASTSHOP.Api.Controllers
             }
         }
 
-        [HttpDelete("{Document}")]
-        public IActionResult Delete(long? Document)
+        [HttpDelete("{Code}")]
+        public IActionResult Delete(string Code)
         {
             try
             {
-                _logger.LogDebug("Exclusão do cliente: " + Document);
-                var ok = this._clientBusiness.Delete(Document);
+                _logger.LogDebug("Exclusão do Produto: " + Code);
+                var ok = this._productBusiness.Delete(Code);
                 if (ok)
                 {
                     return new NoContentResult();
                 }
                 else
                 {
-                    _logger.LogDebug("Cliente não encontrado");
+                    _logger.LogDebug("Produto não encontrado");
                     return new NotFoundResult();
                 }
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Erro ao excluir cliente");
+                _logger.LogError(exception, "Erro ao excluir Produto");
                 return new BadRequestResult();
             }
         }

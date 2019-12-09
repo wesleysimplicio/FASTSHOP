@@ -29,9 +29,9 @@ namespace FASTSHOP.Api.Domain.Repositories
             return result;
         }
 
-        public Client GetById(string Id)
+        public Client GetById(string Code)
         {
-            return this._mongoClient.FindOne<Client>(collection, (x => x.Id == Id));
+            return this._mongoClient.FindOne<Client>(collection, (x => x.Code == Code));
         }
         public Client GetByDocument(long? Document)
         {
