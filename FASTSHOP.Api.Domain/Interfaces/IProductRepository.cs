@@ -7,9 +7,9 @@ namespace FASTSHOP.Api.Domain.Interfaces
     public interface IProductRepository : IDisposable
     {
         List<Product> Get();
-        Product GetById(string Code);
+        Product GetById(string code);
         void Insert(Product product);
         long Update(Product product);
-        long Delete(string Code);
+        long Delete(string code);
     }
 }

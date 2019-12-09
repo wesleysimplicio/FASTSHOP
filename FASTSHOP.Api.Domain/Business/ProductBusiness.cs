@@ -55,11 +55,9 @@ namespace FASTSHOP.Api.Domain.Business
             return _productRepository.Delete(Code) > 0;
         }
 
-
         public void Dispose()
         {
         }
     }
-
 
 }

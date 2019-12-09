@@ -7,10 +7,10 @@ namespace FASTSHOP.Api.Domain.Interfaces
     public interface IClientRepository : IDisposable
     {
         List<Client> Get();
-        Client GetById(string Code);
-        Client GetByDocument(long? Document);
+        Client GetById(string code);
+        Client GetByDocument(long? document);
         void Insert(Client client);
         long Update(Client client);
-        long Delete(long? Document);
+        long Delete(long? document);
     }
 }

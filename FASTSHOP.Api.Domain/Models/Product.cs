@@ -18,7 +18,7 @@ namespace FASTSHOP.Api.Domain.Models
         public string Name {get; set;}
         [Required]
         public decimal Price {get; set;}
-        public StatusEnum Status { get; set; }
+        public StatusEnum? Status { get; set; }
         public DateTime? CreateAt { get; set; }
         public DateTime? UpdateAt { get; set; }
         

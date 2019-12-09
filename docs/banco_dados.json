@@ -1,0 +1,32 @@
+//Database: fastshop
+
+/** Collections **/
+
+//Products
+{
+    "Code": "5d36795888eef21b24abf8c8",
+    "Name": "Mouse sem fio",
+    "Price": 10.90
+}
+
+//Orders
+{
+    "Code": "5d36795888eef21b24abf8c8",
+    "ClientId": "5d36795888eef21b24abf8c8",
+    "Products": [
+        {
+            "Code": "5d36795888eef21b24abf8c8",
+            "Name": "Mouse sem fio",
+            "Price": 10.90
+        }
+    ]
+}
+
+//Clients
+{
+    "Code": "5d36795888eef21b24abf8c8",
+    "Name": "Wesley Simplicio",
+    "Document": 41343850835,
+    "Email": "wesleysimplicio@live.com"
+}
+

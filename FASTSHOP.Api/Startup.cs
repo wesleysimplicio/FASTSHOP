@@ -52,6 +52,8 @@ namespace FASTSHOP.Api
             services.AddScoped<IClientBusiness, ClientBusiness>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductBusiness, ProductBusiness>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderBusiness, OrderBusiness>();
             services.AddScoped<IMongoClient, MongoClient>();
             services.AddMvc();
         }

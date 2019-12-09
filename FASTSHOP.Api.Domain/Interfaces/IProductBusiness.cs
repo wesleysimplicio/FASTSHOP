@@ -7,9 +7,9 @@ namespace FASTSHOP.Api.Domain.Interfaces
     public interface IProductBusiness : IDisposable
     {
         List<Product> Get();
-        Product GetById(string Code);
+        Product GetById(string code);
         bool Insert(Product product);
         bool Update(Product product);
-        bool Delete(string Code);
+        bool Delete(string code);
     }
 }

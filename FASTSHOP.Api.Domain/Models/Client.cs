@@ -20,7 +20,7 @@ namespace FASTSHOP.Api.Domain.Models
         public long? Document { get; set; }
         [Required]
         public string Email { get; set; }
-        public StatusEnum Status { get; set; }
+        public StatusEnum? Status { get; set; }
         public DateTime? CreateAt { get; set; }
         public DateTime? UpdateAt { get; set; }
     }

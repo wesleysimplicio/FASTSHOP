@@ -59,10 +59,7 @@ namespace FASTSHOP.Api.Domain.Business
             if (Document == null) return false;
 
             var result = _clientRepository.GetByDocument(Document);
-            if (result == null)
-            {
-                throw new Exception("Este cliente não existe");
-            }
+            if (result == null) throw new Exception("Este cliente não existe");
 
             return _clientRepository.Delete(Document) > 0;
         }
@@ -71,6 +68,5 @@ namespace FASTSHOP.Api.Domain.Business
         {
         }
     }
-
 
 }
