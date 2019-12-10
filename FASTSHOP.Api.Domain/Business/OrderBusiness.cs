@@ -40,6 +40,7 @@ namespace FASTSHOP.Api.Domain.Business
             var prod = GetById(order.Code);
             if (prod == null) throw new Exception("Este Produto não existe");
 
+            order.Code = prod.Code;
             order.CreateAt = prod.CreateAt;
             order.UpdateAt = DateTime.Now;
             return _orderRepository.Update(order) > 0;

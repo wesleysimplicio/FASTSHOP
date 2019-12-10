@@ -49,6 +49,7 @@ namespace FASTSHOP.Api.Domain.Business
             var cliResult = GetByDocument(client.Document);
             if (cliResult == null) throw new Exception("Documento não existe");
 
+            client.Code = cliResult.Code;
             client.CreateAt = cliResult.CreateAt;
             client.UpdateAt = DateTime.Now;
             return _clientRepository.Update(client) > 0;
