@@ -23,10 +23,23 @@ namespace FASTSHOP.Api.Domain.Repositories
             this._logger = logger;
         }
 
-        public List<Client> Get()
+        public List<Client> Get(Client client)
         {
-            var result =  this._mongoClient.FindAll<Client>(collection);
-            return result;
+            StringBuilder sb = new StringBuilder();
+            if (client.Document != null)
+                sb.AppendLine("\"Document\":" + client.Document + ",");
+            if (!string.IsNullOrEmpty(client.Name))
+                sb.AppendLine("\"Name\":/" + client.Name + "/i,");
+
+            if (sb.ToString() == string.Empty)
+                return _mongoClient.FindAll<Client>(collection);
+            else
+            {
+                sb.Remove(sb.Length - 3, 2);
+                sb.AppendLine("}");
+                return _mongoClient.Find<Client>(collection, "{" + sb.ToString());
+            }
+
         }
 
         public Client GetById(string Code)

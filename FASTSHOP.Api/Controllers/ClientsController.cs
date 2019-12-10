@@ -1,4 +1,5 @@
-﻿using FASTSHOP.Api.Domain.Interfaces;
+﻿using FASTSHOP.Api.Domain.Enums;
+using FASTSHOP.Api.Domain.Interfaces;
 using FASTSHOP.Api.Domain.Models;
 using FASTSHOP.Api.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -27,11 +28,16 @@ namespace FASTSHOP.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(
+                [FromQuery]string name,
+                [FromQuery]long? document)
         {
             try
             {
-                return Ok(this._clientBusiness.Get());
+                var client = new Client();
+                client.Name = name;
+                client.Document = document;
+                return Ok(this._clientBusiness.Get(client));
             }
             catch (Exception ex)
             {

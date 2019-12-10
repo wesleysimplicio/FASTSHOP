@@ -40,6 +40,16 @@ namespace FASTSHOP.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins("*")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             services.AddMvcCore(options =>
             {
                 options.Filters.Add(typeof(ValidateModelFilter));
@@ -72,7 +82,8 @@ namespace FASTSHOP.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseCors("default");
+            app.UseMvc();            
         }
 
 

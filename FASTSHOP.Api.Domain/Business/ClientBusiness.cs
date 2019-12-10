@@ -16,9 +16,9 @@ namespace FASTSHOP.Api.Domain.Business
         {
             _clientRepository = clientRepository;
         }
-        public List<Client> Get()
+        public List<Client> Get(Client client)
         {
-            return _clientRepository.Get();
+            return _clientRepository.Get(client);
         }
 
         public Client GetById(string Code)
