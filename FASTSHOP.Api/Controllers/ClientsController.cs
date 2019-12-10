@@ -47,7 +47,7 @@ namespace FASTSHOP.Api.Controllers
             }
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet("{document}")]
         public IActionResult GetByDocument(long document)
         {
             try
@@ -57,6 +57,21 @@ namespace FASTSHOP.Api.Controllers
             catch (Exception ex)
             {
                 string error = $"Não foi possível realizar a busca do cliente: {document}";
+                this._logger.LogError(ex, error);
+                return BadRequest(new ErrorItem(2, error));
+            }
+        }
+
+        [HttpGet("{Code}")]
+        public IActionResult GetById(string Code)
+        {
+            try
+            {
+                return Ok(this._clientBusiness.GetById(Code));
+            }
+            catch (Exception ex)
+            {
+                string error = $"Não foi possível realizar a busca do cliente: {Code}";
                 this._logger.LogError(ex, error);
                 return BadRequest(new ErrorItem(2, error));
             }
@@ -87,7 +102,7 @@ namespace FASTSHOP.Api.Controllers
             }
         }
 
-        [HttpPut("{Id}")]
+        [HttpPut("{Code}")]
         public IActionResult Put(string Code, [FromBody]Client client)
         {
             try
