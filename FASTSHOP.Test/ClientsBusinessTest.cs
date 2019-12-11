@@ -61,8 +61,8 @@ namespace FASTSHOP.Test
         {
             var mockClientR = new Mock<IClientRepository>();
             ClientBusiness clientBusiness = new ClientBusiness(mockClientR.Object);
-            var client = new List<Client>();
-            client.Add(new Client()
+            var clientList = new List<Client>();
+            clientList.Add(new Client()
             {
                 Code = "3255d0c982054e1d8d1301ec31039ea3",
                 Name = "Wesley Simplicio",
@@ -71,9 +71,11 @@ namespace FASTSHOP.Test
                 Status = StatusEnum.Active,
                 CreateAt = new DateTime(2019, 12, 08)
             });
-            mockClientR.Setup(p => p.Get()).Returns(client);
+            var client = new Client();
+            client.Code = "3255d0c982054e1d8d1301ec31039ea3";
+            mockClientR.Setup(p => p.Get(client)).Returns(clientList);
 
-            var result = clientBusiness.Get();
+            var result = clientBusiness.Get(client);
             Assert.IsTrue(result.Count > 0);
         }
 
@@ -93,7 +95,7 @@ namespace FASTSHOP.Test
                 Status = StatusEnum.Active,
                 CreateAt = new DateTime(2019, 12, 08)
             };
-            mockClientR.Setup(p => p.GetByDocument(client.Document)).Returns(client);
+            mockClientR.Setup(p => p.GetById(client.Code)).Returns(client);
             mockClientR.Setup(p => p.Update(client)).Returns(1);
             var result = clientBusiness.Update(client);
             Assert.IsTrue(result);

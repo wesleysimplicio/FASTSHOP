@@ -21,8 +21,9 @@ namespace FASTSHOP.Test
         public void Post()
         {
             var mockOrder = new Mock<IOrderRepository>();
+            var mockClientB = new Mock<IClientBusiness>();
 
-            OrderBusiness orderBusiness = new OrderBusiness(mockOrder.Object);
+            OrderBusiness orderBusiness = new OrderBusiness(mockOrder.Object, mockClientB.Object);
             var product = new Product()
             {
                 Code = "3255d0c982054e1d8d1301ec31039ea4",
@@ -46,7 +47,9 @@ namespace FASTSHOP.Test
         public void GetById()
         {
             var mockOrder = new Mock<IOrderRepository>();
-            OrderBusiness OrderBusiness = new OrderBusiness(mockOrder.Object);
+            var mockClientB = new Mock<IClientBusiness>();
+
+            OrderBusiness OrderBusiness = new OrderBusiness(mockOrder.Object, mockClientB.Object);
             var order = new Order()
             {
                 Code = "3255d0c982054e1d8d1301ec31039ea3",
@@ -63,7 +66,9 @@ namespace FASTSHOP.Test
         public void Get()
         {
             var mockOrder = new Mock<IOrderRepository>();
-            OrderBusiness OrderBusiness = new OrderBusiness(mockOrder.Object);
+            var mockClientB = new Mock<IClientBusiness>();
+
+            OrderBusiness OrderBusiness = new OrderBusiness(mockOrder.Object, mockClientB.Object);
             var order = new List<Order>();
             order.Add(new Order()
             {
@@ -83,8 +88,9 @@ namespace FASTSHOP.Test
         public void Put()
         {
             var mockOrder = new Mock<IOrderRepository>();
+            var mockClientB = new Mock<IClientBusiness>();
 
-            OrderBusiness OrderBusiness = new OrderBusiness(mockOrder.Object);
+            OrderBusiness OrderBusiness = new OrderBusiness(mockOrder.Object, mockClientB.Object);
             var order = new Order()
             {
                 Code = "3255d0c982054e1d8d1301ec31039ea3",
