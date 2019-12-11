@@ -15,12 +15,17 @@ namespace FASTSHOP.Api.Domain.Models
         public string Id { get; set; }
         public string Code { get; set; }
         [Required]
-        public string Name {get; set;}
+        public string Name { get; set; }
         [Required]
-        public decimal Price {get; set;}
+        public decimal Price { get; set; }
         public StatusEnum? Status { get; set; }
         public DateTime? CreateAt { get; set; }
         public DateTime? UpdateAt { get; set; }
-        
+
+        public Product()
+        {
+            this.Status = StatusEnum.InStock;
+        }
+
     }
 }

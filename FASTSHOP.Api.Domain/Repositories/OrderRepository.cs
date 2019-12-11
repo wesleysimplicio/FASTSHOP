@@ -31,8 +31,10 @@ namespace FASTSHOP.Api.Domain.Repositories
                 sb.AppendLine("\"Code\":\"" + order.Code + "\",");
             if (!string.IsNullOrEmpty(order.ClientId))
                 sb.AppendLine("\"ClientId\":\"" + order.ClientId + "\",");
-            if (order.Status != null)
+            if (order.Status != null && order.Status != 0)
                 sb.AppendLine("\"Status\":" + (int)order.Status + ",");
+            if (!string.IsNullOrEmpty(order.Client))
+                sb.AppendLine("\"Client\":/" + order.Client + "/i,");
 
             if (order.CreateAt.HasValue)
             {
@@ -46,7 +48,7 @@ namespace FASTSHOP.Api.Domain.Repositories
                 sb.AppendLine(String.Concat("CreateAt:{", dateQuery.ToString(), "},"));
             }
 
-            if (sb.ToString() == string.Empty || (int)order.Status == 0)
+            if (sb.ToString() == string.Empty)
                 return _mongoClient.FindAll<Order>(collection);
             else
             {

@@ -58,7 +58,7 @@ namespace FASTSHOP.Api.Domain.Repositories
 
         public long Update(Client client)
         {
-            return this._mongoClient.Replace<Client>(collection, (collection => client.Document == client.Document), client);
+            return this._mongoClient.Replace<Client>(collection, (collection => client.Code == client.Code), client);
         }
 
         public long Delete(long? document)

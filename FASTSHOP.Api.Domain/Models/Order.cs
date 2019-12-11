@@ -13,6 +13,7 @@ namespace FASTSHOP.Api.Domain.Models
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
         public string Code { get; set; }
+        public string Client { get; set; }
         public string ClientId { get; set; }
         public List<Product> Products { get; set; }
         public StatusEnum? Status { get; set; }
@@ -22,6 +23,7 @@ namespace FASTSHOP.Api.Domain.Models
         public Order()
         {
             this.Products = new List<Product>();
+            this.Status = StatusEnum.Processing;
         }
 
     }

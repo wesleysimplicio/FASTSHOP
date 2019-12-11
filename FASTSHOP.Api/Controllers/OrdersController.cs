@@ -30,6 +30,7 @@ namespace FASTSHOP.Api.Controllers
         [HttpGet]
         public IActionResult Get(
                 [FromQuery]string code,
+                [FromQuery]string client,
                 [FromQuery]string clientId,
                 [FromQuery]StatusEnum status,
                 [FromQuery]DateTime? createAt)
@@ -38,6 +39,7 @@ namespace FASTSHOP.Api.Controllers
             {
                 var order = new Order();
                 order.Code = code;
+                order.Client = client;
                 order.ClientId = clientId;
                 order.Status = status;
                 order.CreateAt = createAt;

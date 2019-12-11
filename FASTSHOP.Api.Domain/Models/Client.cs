@@ -22,5 +22,10 @@ namespace FASTSHOP.Api.Domain.Models
         public StatusEnum? Status { get; set; }
         public DateTime? CreateAt { get; set; }
         public DateTime? UpdateAt { get; set; }
+
+        public Client()
+        {
+            this.Status = StatusEnum.Active;
+        }
     }
 }

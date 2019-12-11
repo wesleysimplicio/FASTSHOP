@@ -34,11 +34,10 @@ namespace FASTSHOP.Api.Domain.Business
         public bool Insert(Client client)
         {
             var findDocument = GetByDocument(client.Document);
-            if (findDocument != null) throw new Exception("Documento já existe");
+            if (findDocument != null) throw new Exception("CPF já existe");
 
             client.Code = Guid.NewGuid().ToString("N");
             client.CreateAt = DateTime.Now;
-            client.Status = StatusEnum.Active;
             _clientRepository.Insert(client);
 
             return true;
@@ -46,9 +45,10 @@ namespace FASTSHOP.Api.Domain.Business
 
         public bool Update(Client client)
         {
-            var cliResult = GetByDocument(client.Document);
-            if (cliResult == null) throw new Exception("Documento não existe");
+            var cliResult = GetById(client.Code);
+            if (cliResult == null) throw new Exception("Cliente não existe");
 
+            client.Id = null;
             client.Code = cliResult.Code;
             client.CreateAt = cliResult.CreateAt;
             client.UpdateAt = DateTime.Now;

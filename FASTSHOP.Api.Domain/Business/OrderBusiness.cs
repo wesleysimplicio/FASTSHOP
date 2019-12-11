@@ -10,11 +10,14 @@ namespace FASTSHOP.Api.Domain.Business
     public class OrderBusiness : IOrderBusiness
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IClientBusiness _clientBusiness;
 
         public OrderBusiness(
-           IOrderRepository orderRepository)
+           IOrderRepository orderRepository,
+           IClientBusiness clientBusiness)
         {
             _orderRepository = orderRepository;
+            _clientBusiness = clientBusiness;
         }
         public List<Order> Get(Order order)
         {
@@ -30,7 +33,10 @@ namespace FASTSHOP.Api.Domain.Business
         {
             order.Code = Guid.NewGuid().ToString("N");
             order.CreateAt = DateTime.Now;
-            order.Status = StatusEnum.Processing;
+
+            var client = _clientBusiness.GetById(order.ClientId);
+            if (client != null) order.Client = client.Name;
+
             _orderRepository.Insert(order);
             return true;
         }
@@ -40,6 +46,10 @@ namespace FASTSHOP.Api.Domain.Business
             var prod = GetById(order.Code);
             if (prod == null) throw new Exception("Este Produto não existe");
 
+            var client = _clientBusiness.GetById(order.ClientId);
+            if (client != null) order.Client = client.Name;
+
+            order.Id = null;
             order.Code = prod.Code;
             order.CreateAt = prod.CreateAt;
             order.UpdateAt = DateTime.Now;
